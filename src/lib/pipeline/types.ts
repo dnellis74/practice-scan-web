@@ -14,6 +14,10 @@ export type PipelineInput = {
   practiceName: string;
   /** If omitted, server steps may compute radius (see SKILL). */
   radiusMi?: number;
+  /** Optional — narrows search / report copy (e.g. Local Falcon proximity). */
+  city?: string;
+  /** Optional — US state or region (e.g. OH). */
+  state?: string;
 };
 
 export type ResolveResult = {
