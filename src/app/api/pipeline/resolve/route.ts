@@ -179,7 +179,7 @@ export async function POST(req: Request) {
   } catch (e) {
     if (e instanceof LocalFalconApiError) {
       console.error("[resolve] Local Falcon API error:", e.message);
-      return fail("resolve", e.message, "localfalcon_error", 502);
+      return fail("resolve", e.message, "localfalcon_error", 500);
     }
     throw e;
   }
