@@ -9,6 +9,7 @@ export type PipelineStepId =
   | "retrieve-scans"
   | "analyze-scan"
   | "website"
+  | "analyze-website"
   | "demographics"
   | "render";
 
@@ -80,8 +81,14 @@ export type WebsiteResult = {
   scrape?: WebsiteScrapeMetrics;
 };
 
-export type DemographicsResult = {
+export type AnalyzeWebsiteResult = {
   summary: string;
+};
+
+export type DemographicsResult = {
+  /** Markdown — Demographic Opportunity section and related analysis */
+  summary: string;
+  /** e.g. methodology caveats, verification reminders */
   queryNotes?: string;
 };
 
@@ -99,6 +106,7 @@ export type PipelineState = {
   retrieveScans?: RetrieveScansResult;
   analyzeScan?: AnalyzeScanResult;
   website?: WebsiteResult;
+  analyzeWebsite?: AnalyzeWebsiteResult;
   demographics?: DemographicsResult;
   render?: RenderResult;
 };
@@ -112,6 +120,7 @@ export type PipelineStepSuccess = {
     | RetrieveScansResult
     | AnalyzeScanResult
     | WebsiteResult
+    | AnalyzeWebsiteResult
     | DemographicsResult
     | RenderResult;
 };
@@ -131,6 +140,7 @@ export const PIPELINE_STEPS: readonly PipelineStepId[] = [
   "retrieve-scans",
   "analyze-scan",
   "website",
+  "analyze-website",
   "demographics",
   "render",
 ] as const;

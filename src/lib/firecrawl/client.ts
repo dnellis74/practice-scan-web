@@ -1,9 +1,10 @@
 import { FirecrawlApiError } from "./errors";
-import type {
-  FirecrawlMapParams,
-  FirecrawlMapResponse,
-  FirecrawlScrapeParams,
-  FirecrawlScrapeResponse,
+import {
+  FIRECRAWL_FORMAT_MARKDOWN,
+  type FirecrawlMapParams,
+  type FirecrawlMapResponse,
+  type FirecrawlScrapeParams,
+  type FirecrawlScrapeResponse,
 } from "./types";
 
 const DEFAULT_BASE = "https://api.firecrawl.dev/v2";
@@ -86,7 +87,7 @@ export class FirecrawlClient {
     const { url, formats, ...rest } = params;
     return this.postJson<FirecrawlScrapeResponse>("/scrape", {
       url,
-      formats: formats ?? ["markdown"],
+      formats: formats ?? FIRECRAWL_FORMAT_MARKDOWN,
       ...rest,
     });
   }

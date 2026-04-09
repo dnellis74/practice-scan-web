@@ -1,4 +1,4 @@
-import { createFirecrawlClient } from "@/lib/firecrawl";
+import { createFirecrawlClient, FIRECRAWL_FORMAT_MARKDOWN } from "@/lib/firecrawl";
 import { FirecrawlApiError } from "@/lib/firecrawl/errors";
 import type { WebsiteScrapeMetrics } from "@/lib/pipeline/types";
 
@@ -62,7 +62,7 @@ async function runFirecrawl(
     const fc = createFirecrawlClient();
     const res = await fc.scrape({
       url,
-      formats: ["markdown"],
+      formats: FIRECRAWL_FORMAT_MARKDOWN,
       onlyMainContent: true,
     });
     const ms = Date.now() - t0;

@@ -3,9 +3,17 @@
  * @see https://docs.firecrawl.dev/api-reference/introduction
  */
 
+/** v2 scrape `formats` entry — requests page content as Markdown. */
+export type FirecrawlMarkdownFormat = { type: "markdown" };
+
+/** Default scrape output: markdown only (override `formats` to add html, links, etc.). */
+export const FIRECRAWL_FORMAT_MARKDOWN: FirecrawlMarkdownFormat[] = [
+  { type: "markdown" },
+];
+
 export type FirecrawlScrapeParams = {
   url: string;
-  /** Default in client: markdown for pipeline text */
+  /** Default: {@link FIRECRAWL_FORMAT_MARKDOWN} */
   formats?: unknown;
   onlyMainContent?: boolean;
   timeout?: number;

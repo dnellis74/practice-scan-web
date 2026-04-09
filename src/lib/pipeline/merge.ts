@@ -6,6 +6,7 @@ import type {
   RetrieveScansResult,
   ScansResult,
   WebsiteResult,
+  AnalyzeWebsiteResult,
   DemographicsResult,
   RenderResult,
 } from "./types";
@@ -19,6 +20,7 @@ export function mergeStepData(
     | RetrieveScansResult
     | AnalyzeScanResult
     | WebsiteResult
+    | AnalyzeWebsiteResult
     | DemographicsResult
     | RenderResult,
 ): PipelineState {
@@ -33,6 +35,8 @@ export function mergeStepData(
       return { ...state, analyzeScan: data as AnalyzeScanResult };
     case "website":
       return { ...state, website: data as WebsiteResult };
+    case "analyze-website":
+      return { ...state, analyzeWebsite: data as AnalyzeWebsiteResult };
     case "demographics":
       return { ...state, demographics: data as DemographicsResult };
     case "render":

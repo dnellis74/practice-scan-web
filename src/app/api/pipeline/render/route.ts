@@ -20,11 +20,12 @@ export async function POST(req: Request) {
     !state.retrieveScans ||
     !state.analyzeScan ||
     !state.website ||
+    !state.analyzeWebsite ||
     !state.demographics
   ) {
     return fail(
       "render",
-      "resolve, scans, retrieve-scans, analyze-scan, website, and demographics must complete first",
+      "resolve, scans, retrieve-scans, analyze-scan, website, analyze-website, and demographics must complete first",
       "missing_prereqs",
     );
   }

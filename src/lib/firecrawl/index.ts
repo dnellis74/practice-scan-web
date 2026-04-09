@@ -5,7 +5,9 @@ export type {
   FirecrawlMapLink,
   FirecrawlMapParams,
   FirecrawlMapResponse,
+  FirecrawlMarkdownFormat,
   FirecrawlScrapeData,
   FirecrawlScrapeParams,
   FirecrawlScrapeResponse,
 } from "./types";
+export { FIRECRAWL_FORMAT_MARKDOWN } from "./types";
