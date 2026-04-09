@@ -204,15 +204,17 @@ export function PipelineApp() {
                   ? state.scans
                   : id === "retrieve-scans"
                     ? state.retrieveScans
-                    : id === "analyze-scan"
-                      ? state.analyzeScan
-                      : id === "website"
-                        ? state.website
-                        : id === "analyze-website"
-                          ? state.analyzeWebsite
-                          : id === "demographics"
-                            ? state.demographics
-                            : state.render);
+                    : id === "analyze-gbp"
+                      ? state.analyzeGbp
+                      : id === "analyze-scan"
+                        ? state.analyzeScan
+                        : id === "website"
+                          ? state.website
+                          : id === "analyze-website"
+                            ? state.analyzeWebsite
+                            : id === "demographics"
+                              ? state.demographics
+                              : state.render);
             const active = currentStep === id;
             const parseErr =
               !!b && "parseError" in b && b.parseError === true;

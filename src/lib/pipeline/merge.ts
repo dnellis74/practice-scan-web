@@ -3,6 +3,7 @@ import type {
   PipelineState,
   PipelineStepId,
   ResolveResult,
+  AnalyzeGbpResult,
   RetrieveScansResult,
   ScansResult,
   WebsiteResult,
@@ -16,6 +17,7 @@ export function mergeStepData(
   step: PipelineStepId,
   data:
     | ResolveResult
+    | AnalyzeGbpResult
     | ScansResult
     | RetrieveScansResult
     | AnalyzeScanResult
@@ -27,6 +29,8 @@ export function mergeStepData(
   switch (step) {
     case "resolve":
       return { ...state, resolve: data as ResolveResult };
+    case "analyze-gbp":
+      return { ...state, analyzeGbp: data as AnalyzeGbpResult };
     case "scans":
       return { ...state, scans: data as ScansResult };
     case "retrieve-scans":

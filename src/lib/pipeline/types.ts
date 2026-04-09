@@ -5,6 +5,7 @@
 
 export type PipelineStepId =
   | "resolve"
+  | "analyze-gbp"
   | "scans"
   | "retrieve-scans"
   | "analyze-scan"
@@ -32,6 +33,13 @@ export type ResolveResult = {
   websiteUrl: string | null;
   rating?: number;
   reviewCount?: number;
+};
+
+/** Google Business Profile analysis (listing quality, categories, etc.). Markdown. */
+export type AnalyzeGbpResult = {
+  summary: string;
+  /** Caveats e.g. thin Local Falcon payload */
+  queryNotes?: string;
 };
 
 export type ScanReportStub = {
@@ -102,6 +110,7 @@ export type RenderResult = {
 export type PipelineState = {
   input: PipelineInput;
   resolve?: ResolveResult;
+  analyzeGbp?: AnalyzeGbpResult;
   scans?: ScansResult;
   retrieveScans?: RetrieveScansResult;
   analyzeScan?: AnalyzeScanResult;
@@ -116,6 +125,7 @@ export type PipelineStepSuccess = {
   step: PipelineStepId;
   data:
     | ResolveResult
+    | AnalyzeGbpResult
     | ScansResult
     | RetrieveScansResult
     | AnalyzeScanResult
@@ -138,6 +148,7 @@ export const PIPELINE_STEPS: readonly PipelineStepId[] = [
   "resolve",
   "scans",
   "retrieve-scans",
+  "analyze-gbp",
   "analyze-scan",
   "website",
   "analyze-website",
