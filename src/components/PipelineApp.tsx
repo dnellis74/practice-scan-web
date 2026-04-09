@@ -268,7 +268,7 @@ export function PipelineApp() {
                   </summary>
                   <div className="border-t border-zinc-200 px-3 py-2 dark:border-zinc-800">
                     {outcome ? (
-                      <pre className="max-h-80 overflow-auto whitespace-pre-wrap break-words rounded-md bg-zinc-100/80 p-3 font-mono text-xs text-zinc-800 dark:bg-zinc-950 dark:text-zinc-300">
+                      <pre className="max-h-[min(70vh,48rem)] overflow-auto whitespace-pre-wrap break-words rounded-md bg-zinc-100/80 p-3 font-mono text-xs text-zinc-800 dark:bg-zinc-950 dark:text-zinc-300">
                         {JSON.stringify(
                           sanitizeForStepDisplay(outcome.body),
                           null,
