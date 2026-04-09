@@ -103,3 +103,32 @@ export type GetScanReportProcessingData = {
   report_key?: string;
   status?: string;
 };
+
+/** Platforms accepted by POST /v2/run-scan/ (OpenAPI). */
+export type LocalFalconRunScanPlatform =
+  | "aimode"
+  | "apple"
+  | "chatgpt"
+  | "gaio"
+  | "gemini"
+  | "google"
+  | "grok";
+
+/** Grid side length; API expects string values "3" … "21". */
+export type LocalFalconRunScanGridSize =
+  | "3"
+  | "5"
+  | "7"
+  | "9"
+  | "11"
+  | "13"
+  | "15"
+  | "17"
+  | "19"
+  | "21";
+
+/**
+ * POST /v2/run-scan/ — `data` on success (report + ranking fields; large / variable).
+ * @see https://docs.localfalcon.com/openapi.yaml
+ */
+export type RunScanData = Record<string, unknown>;

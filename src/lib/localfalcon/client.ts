@@ -4,7 +4,10 @@ import type {
   ListLocationsData,
   ListScanReportsData,
   LocalFalconEnvelope,
+  LocalFalconRunScanGridSize,
+  LocalFalconRunScanPlatform,
   LocalFalconScanReportData,
+  RunScanData,
   SaveBusinessLocationData,
   SearchBusinessLocationData,
 } from "./types";
@@ -105,16 +108,54 @@ export class LocalFalconClient {
   }
 
   /**
-   * MCP: listLocalFalconScanReports → POST /v1/reports/
-   * Dates: MM/DD/YYYY
+   * OpenAPI: runScan → POST /v2/run-scan/
+   * Location must be saved to the account first (see {@link saveBusinessLocation}).
+   * `lat`, `lng`, and `radius` are sent as strings per API (use numeric input if you prefer).
+   *
+   * @see https://docs.localfalcon.com/#tag/scans--reports/POST/v2/run-scan/
    */
-  async listLocalFalconScanReports(params?: {
+  async runScan(params: {
+    place_id: string;
+    keyword: string;
+    lat: string | number;
+    lng: string | number;
+    grid_size: LocalFalconRunScanGridSize;
+    /** 0.1–100 as string per OpenAPI */
+    radius: string | number;
+    measurement: "mi" | "km";
+    platform: LocalFalconRunScanPlatform;
+    ai_analysis?: boolean;
+    eager?: boolean;
+  }): Promise<LocalFalconEnvelope<RunScanData>> {
+    return this.postForm<RunScanData>("/v2/run-scan/", {
+      place_id: params.place_id,
+      keyword: params.keyword,
+      lat: params.lat,
+      lng: params.lng,
+      grid_size: params.grid_size,
+      radius: params.radius,
+      measurement: params.measurement,
+      platform: params.platform,
+      ai_analysis: params.ai_analysis,
+      eager: params.eager,
+    });
+  }
+
+  /**
+   * OpenAPI: listScanReports → POST /v1/reports/
+   * Paginated list of scan reports for the account. Dates: MM/DD/YYYY.
+   *
+   * @see https://docs.localfalcon.com/openapi.yaml
+   */
+  async listScanReports(params?: {
     start_date?: string;
     end_date?: string;
+    /** Comma-separated place IDs allowed */
     place_id?: string;
     keyword?: string;
     grid_size?: string;
     campaign_key?: string;
+    /** Comma-separated: aimode, apple, chatgpt, gaio, gemini, google, grok */
     platform?: string;
     fields?: string;
     limit?: number;
@@ -132,6 +173,15 @@ export class LocalFalconClient {
       limit: params?.limit,
       next_token: params?.next_token,
     });
+  }
+
+  /**
+   * MCP alias for {@link listScanReports} → POST /v1/reports/
+   */
+  async listLocalFalconScanReports(
+    params?: Parameters<LocalFalconClient["listScanReports"]>[0],
+  ): Promise<LocalFalconEnvelope<ListScanReportsData>> {
+    return this.listScanReports(params);
   }
 
   /**

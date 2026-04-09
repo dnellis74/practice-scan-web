@@ -164,6 +164,20 @@ export async function POST(req: Request) {
       );
     }
 
+    try {
+      await lf.saveBusinessLocation({
+        platform: "google",
+        place_id: data.placeId,
+      });
+      console.log("[resolve] Saved matched location:", data.placeId, data.name);
+    } catch (saveError) {
+      // Search succeeded; keep the flow moving even if persistence fails.
+      console.warn(
+        "[resolve] Failed to save matched location; continuing:",
+        saveError,
+      );
+    }
+
     console.log(
       "[resolve] Matched via search:",
       data.placeId,

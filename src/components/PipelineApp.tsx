@@ -202,6 +202,8 @@ export function PipelineApp() {
                 ? state.resolve
                 : id === "scans"
                   ? state.scans
+                  : id === "analyze-scan"
+                    ? state.analyzeScan
                   : id === "website"
                     ? state.website
                     : id === "demographics"

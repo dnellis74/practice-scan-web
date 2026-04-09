@@ -8,8 +8,11 @@ export type {
   LocalFalconEnvelope,
   LocalFalconLocationRow,
   LocalFalconReportSummary,
+  LocalFalconRunScanGridSize,
+  LocalFalconRunScanPlatform,
   LocalFalconScanReportData,
   LocalFalconSearchResult,
+  RunScanData,
   SaveBusinessLocationData,
   SearchBusinessLocationData,
 } from "./types";

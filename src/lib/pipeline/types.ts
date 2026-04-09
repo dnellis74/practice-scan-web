@@ -6,6 +6,7 @@
 export type PipelineStepId =
   | "resolve"
   | "scans"
+  | "analyze-scan"
   | "website"
   | "demographics"
   | "render";
@@ -46,6 +47,10 @@ export type ScansResult = {
   reports: ScanReportStub[];
 };
 
+export type AnalyzeScanResult = {
+  summary: string;
+};
+
 export type WebsiteResult = {
   url: string;
   markdown: string;
@@ -67,6 +72,7 @@ export type PipelineState = {
   input: PipelineInput;
   resolve?: ResolveResult;
   scans?: ScansResult;
+  analyzeScan?: AnalyzeScanResult;
   website?: WebsiteResult;
   demographics?: DemographicsResult;
   render?: RenderResult;
@@ -78,6 +84,7 @@ export type PipelineStepSuccess = {
   data:
     | ResolveResult
     | ScansResult
+    | AnalyzeScanResult
     | WebsiteResult
     | DemographicsResult
     | RenderResult;
@@ -95,6 +102,7 @@ export type PipelineStepResponse = PipelineStepSuccess | PipelineStepFailure;
 export const PIPELINE_STEPS: readonly PipelineStepId[] = [
   "resolve",
   "scans",
+  "analyze-scan",
   "website",
   "demographics",
   "render",
