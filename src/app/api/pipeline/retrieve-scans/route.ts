@@ -50,13 +50,13 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return fail("retrieve-reports", "Request body must be JSON", "invalid_json");
+    return fail("retrieve-scans", "Request body must be JSON", "invalid_json");
   }
 
   const state = body.state;
   if (!state?.scans?.reports?.length) {
     return fail(
-      "retrieve-reports",
+      "retrieve-scans",
       "scans step must complete with at least one report",
       "missing_prereqs",
     );
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
   }
   if (missingKeys.length > 0) {
     return fail(
-      "retrieve-reports",
+      "retrieve-scans",
       `Every scan needs a reportKey from Local Falcon. Missing for: ${missingKeys.join(", ")}`,
       "missing_report_key",
     );
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
     lf = createLocalFalconClient();
   } catch {
     return fail(
-      "retrieve-reports",
+      "retrieve-scans",
       "LOCALFALCON_API_KEY is not configured",
       "missing_api_key",
       500,
@@ -102,13 +102,13 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       ok: true,
-      step: "retrieve-reports" as const,
+      step: "retrieve-scans" as const,
       data: { reports },
     });
   } catch (e) {
     if (e instanceof LocalFalconApiError) {
-      console.error("[retrieve-reports] Local Falcon API error:", e.message);
-      return fail("retrieve-reports", e.message, "localfalcon_error", 500);
+      console.error("[retrieve-scans] Local Falcon API error:", e.message);
+      return fail("retrieve-scans", e.message, "localfalcon_error", 500);
     }
     throw e;
   }

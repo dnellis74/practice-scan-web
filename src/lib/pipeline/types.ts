@@ -6,7 +6,7 @@
 export type PipelineStepId =
   | "resolve"
   | "scans"
-  | "retrieve-reports"
+  | "retrieve-scans"
   | "analyze-scan"
   | "website"
   | "demographics"
@@ -55,7 +55,7 @@ export type RetrievedScanReport = {
   payload: Record<string, unknown>;
 };
 
-export type RetrieveReportsResult = {
+export type RetrieveScansResult = {
   reports: RetrievedScanReport[];
 };
 
@@ -84,7 +84,7 @@ export type PipelineState = {
   input: PipelineInput;
   resolve?: ResolveResult;
   scans?: ScansResult;
-  retrieveReports?: RetrieveReportsResult;
+  retrieveScans?: RetrieveScansResult;
   analyzeScan?: AnalyzeScanResult;
   website?: WebsiteResult;
   demographics?: DemographicsResult;
@@ -97,7 +97,7 @@ export type PipelineStepSuccess = {
   data:
     | ResolveResult
     | ScansResult
-    | RetrieveReportsResult
+    | RetrieveScansResult
     | AnalyzeScanResult
     | WebsiteResult
     | DemographicsResult
@@ -116,7 +116,7 @@ export type PipelineStepResponse = PipelineStepSuccess | PipelineStepFailure;
 export const PIPELINE_STEPS: readonly PipelineStepId[] = [
   "resolve",
   "scans",
-  "retrieve-reports",
+  "retrieve-scans",
   "analyze-scan",
   "website",
   "demographics",
